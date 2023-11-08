@@ -74,3 +74,52 @@ function search_tasks() {
 }
 
 # Read user commands and execute them
+while true; do
+    read -p "Enter your command (type 'help' for command list): " command
+
+    case $command in
+        "add" )
+            read -p "Enter the new task: " new_task
+            add_task "$new_task"
+            ;;
+        "show_pending" )
+            show_pending_tasks
+            ;;
+        "show_completed" )
+            show_completed_tasks
+            ;;
+        "show_deleted" )
+            show_deleted_tasks
+            ;;
+        "complete" )
+            read -p "Enter the task to mark as completed: " task_to_complete
+            complete_task "$task_to_complete"
+            ;;
+        "delete" )
+            read -p "Enter the task to delete: " task_to_delete
+            delete_task "$task_to_delete"
+            ;;
+        "search" )
+            read -p "Enter the search query: " search_query
+            search_tasks "$search_query"
+            ;;
+        "help" )
+            echo "Available commands:"
+            echo "add: Add a new task"
+            echo "show_pending: Display pending tasks"
+            echo "show_completed: Display completed tasks"
+            echo "show_deleted: Display deleted tasks"
+            echo "complete: Mark a task as completed"
+            echo "delete: Delete a task"
+            echo "search: Search tasks"
+            echo "help: Display this help message"
+            echo "exit: Exit the program"
+            ;;
+        "exit" )
+            break
+            ;;
+        * )
+            echo "Invalidcommand. Please enter a valid command or type 'help' for a list of commands."
+            ;;
+    esac
+done
